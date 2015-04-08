@@ -1,0 +1,43 @@
+{% extends 'layout_page.html' %}
+
+{% load gitlist_tags %}
+
+{% block title %}GitList{% endblock %}
+
+{% block content %}
+    <ol class="breadcrumb">
+        {% include 'breadcrumb.html' %}
+        <div class="pull-right">
+            <div class="btn-group download-buttons">
+                <a type="button" href="{% url 'archive' repo=repo branch=branch format='zip' %}" class="btn btn-default btn-xs" title="Download '{{ branch }}' as a ZIP archive">ZIP</a>
+                <a type="button" href="{% url 'archive' repo=repo branch=branch format='tar' %}" class="btn btn-default btn-xs" title="Download '{{ branch }}' as a TAR archive">TAR</a>
+                <a href="{% url 'rss' repo=repo branch=branch %}"><span class="fa fa-rss rss-icon"></span></a>
+            </div>
+        </div>
+    </ol>
+
+    {% if results %}
+    <table class="table tree">
+        <thead>
+            <tr>
+                <th width="20%">Name</th>
+                <th width="80%">Match</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                {% join branch '/' result.file sep='' as commitishPath %}
+                <td>
+                    <span class="fa fa-file-text-o"></span> <a href="{% url 'blob' repo=repo commitishPath=commitishPath %}?branch={{ branch|urlencode }}&amp;file={{ result.file|urlencode }}#L{{ result.line }}">{{ result.file }}</a><br>
+                    <pre>{{ result.match.0 }}<b>{{ result.match.1 }}</b>{{ result.match.2 }}</pre></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+
+    <hr />
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'layout_page.html' %}
+
+{% load gitlist_tags %}
+
+{% block title %}GitList{% endblock %}
+
+{% block content %}
+    <ol class="breadcrumb">
+        {% include 'breadcrumb.html' %}
+    </ol>
+
+    <div class="source-view">
+        {% join branch '/' file sep='' as commitishPath %}
+        <div class="source-header">
+            <div class="meta"></div>
+
+            <div class="btn-group pull-right">
+                <a href="{% url 'blob_raw' repo=repo commitishPath=commitishPath %}" class="btn btn-default btn-sm"><span class="fa fa-file-text-o"></span> Raw</a>
+                <a href="{% url 'blame' repo=repo commitishPath=commitishPath %}" class="btn btn-default btn-sm"><span class="fa fa-bullhorn"></span> Blame</a>
+                <a href="{% url 'commits' repo=repo commitishPath=commitishPath %}" class="btn btn-default btn-sm"><span class="fa fa-list"></span> History</a>
+            </div>
+        </div>
+        {% if fileType == 'image' %}
+        <div class="text-center"><img src="{% url 'blob_raw' repo=repo commitishPath=commitishPath %}" alt="{{ file }}" class="image-blob" /></div>
+
+        {% elif fileType == 'markdown' %}
+            <div class="md-view"><div id="md-content">{{ blob }}</div></div>
+        {% else %}
+            <pre id="sourcecode" language="{{ fileType }}">{{ blob|escape }}</pre>
+        {% endif %}
+    </div>
+
+    <hr />
+{% endblock %}

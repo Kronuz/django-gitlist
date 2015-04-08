@@ -1,0 +1,5 @@
+{% load gitlist_tags %}
+<li><a href="{% url 'tree' repo=repo commitishPath=branch %}">{{ repo }}</a></li>
+{% for breadcrumb in breadcrumbs %}
+    <li{% if forloop.last %} class="active"{% endif %}>{% if not forloop.last %}<a href="{{ breadcrumb.path }}">{{ breadcrumb.dir }}</a>{% endif %}{% if forloop.last %}{{ breadcrumb.dir }}{% endif %}</li>
+{% endfor %}

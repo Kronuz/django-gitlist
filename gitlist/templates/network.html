@@ -1,0 +1,21 @@
+{% extends 'layout_page.html' %}
+
+{% block title %}GitList{% endblock %}
+
+{% block content %}
+	<ol class="breadcrumb">
+		{% include 'breadcrumb.html' %}
+	</ol>
+	<div class="network-view">
+		<div class="network-header">
+			<h4 class="meta">Network Graph of {{ repo }} / {{ commitishPath }}</h4>
+		</div>
+
+		<div class="network-graph" data-source="{% url 'network_data' repo=repo commitishPath=commitishPath page='0' %}">
+		{#<div class="network-graph" data-source="/dummynetwork.json">#}
+
+		</div>
+	</div>
+
+	<hr />
+{% endblock %}

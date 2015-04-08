@@ -1,0 +1,86 @@
+{% extends 'layout_page.html' %}
+
+{% load gitlist_tags %}
+
+{% block title %}GitList{% endblock %}
+
+{% block content %}
+    <ol class="breadcrumb">
+        {% include 'breadcrumb.html' %}
+    </ol>
+
+    <div class="commit-view">
+        <div class="commit-header">
+            <span class="pull-right">
+                <a class="btn btn-default btn-sm" href="{% url 'branch' repo=repo branch=commit.hash %}" title="Browse code at this point in history"><span class="fa fa-list-alt"></span> Browse code</a></span>
+            <h4>{{ commit.message }}</h4>
+        </div>
+        <div class="commit-body">
+            {% if commit.body %}
+                <p>{{ commit.body|linebreaksbr }}</p>
+            {% endif %}
+            <img src="https://gravatar.com/avatar/{{ commit.author.email|lower|md5 }}?s=32" class="pull-left space-right" />
+            <span>
+                <a href="mailto:{{ commit.author.email }}">{{ commit.author.name }}</a> authored on {{ commit.date|date }}
+                {% if commit.author.email != commit.commiter.email %}
+                &bull; <a href="mailto:{{ commit.commiter.email }}">{{ commit.commiter.name }}</a> committed on {{ commit.commiterDate|date }}
+                {% endif %}
+                <br />Showing {{ commit.changedFiles }} changed files
+            </span>
+        </div>
+    </div>
+
+    <ul class="commit-list">
+        {% for diff in commit.diffs %}
+            <li><i class="fa fa-file-text-o"></i> <a href="#diff-{{ forloop.counter }}">{{ diff.file }}</a> <span class="meta pull-right">{{ diff.index }}</span></li>
+        {% endfor %}
+    </ul>
+
+    {% for diff in commit.diffs %}
+    <div class="source-view">
+        <div class="source-header">
+            <div class="meta"><a id="diff-{{ forloop.counter }}">{{ diff.file }}</div>
+
+            <div class="btn-group pull-right">
+                {% join commit.hash '/' diff.file sep='' as commitishPath %}
+                <a href="{% url 'commits' repo=repo commitishPath=commitishPath %}"  class="btn btn-default btn-sm"><span class="fa fa-list-alt"></span> History</a>
+                <a href="{% url 'blob' repo=repo commitishPath=commitishPath %}"  class="btn btn-default btn-sm"><span class="fa fa-file"></span> View file @ {{ commit.shortHash }}</a>
+            </div>
+        </div>
+
+        <div class="source-diff">
+        <table>
+        {% for line in diff.getLines %}
+            <tr>
+                <td class="lineNo">
+                    {% if line.getType != 'chunk' %}
+                        <a name="L{{ forloop.counter }}R{{ line.getNumOld }}"></a>
+                        <a href="#L{{ forloop.counter }}R{{ line.getNumOld }}">
+                    {% endif %}
+                    {{ line.getNumOld }}
+                    {% if line.getType != 'chunk' %}
+                        </a>
+                    {% endif %}
+                </td>
+                <td class="lineNo">
+                    {% if line.getType != 'chunk' %}
+                        <a name="L{{ forloop.counter }}L{{ line.getNumNew }}"></a>
+                        <a href="#L{{ forloop.counter }}L{{ line.getNumNew }}">
+                    {% endif %}
+                    {{ line.getNumNew }}
+                    {% if line.getType != 'chunk' %}
+                        </a>
+                    {% endif %}
+                </td>
+                <td style="width: 100%">
+                    <pre{% if line.getType %} class="{{ line.getType }}"{% endif %}>{{ line.getLine }}</pre>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    </div>
+    {% endfor %}
+
+    <hr />
+{% endblock %}

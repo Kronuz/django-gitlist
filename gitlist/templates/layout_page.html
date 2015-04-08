@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% include 'navigation.html' %}
+
+    <div class="container">
+        <div class="header row">
+            <div class="col-sm-12">
+                {% if page == 'commits' or page == 'searchcommits' %}
+                <form class="pull-right" action="{% url 'searchcommits' repo=repo branch=branch %}" method="POST">
+                    {% csrf_token %}
+                    <input type="search" name="query" class="form-control input-sm" placeholder="Search commits..." value="{{ query|urlencode }}">
+                </form>
+                {% else %}
+                <form class="pull-right" action="{% url 'searchbranch' repo=repo branch=branch %}" method="POST">
+                    {% csrf_token %}
+                    <input type="search" name="query" class="form-control input-sm" placeholder="Search tree..." value="{{ query|urlencode }}">
+                </form>
+                {% endif %}
+
+                {% if branches != None %}
+                    {% include 'branch_menu.html' %}
+                {% endif %}
+
+                {% include 'menu.html' %}
+            </div>
+        </div>
+
+        {% block content %}{% endblock %}
+
+        {% include 'footer.html' %}
+    </div>
+{% endblock %}

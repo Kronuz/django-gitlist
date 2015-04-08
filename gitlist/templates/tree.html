@@ -1,0 +1,68 @@
+{% extends 'layout_page.html' %}
+
+{% load gitlist_tags %}
+
+{% block title %}GitList{% endblock %}
+
+{% block content %}
+    <ol class="breadcrumb">
+        {% include 'breadcrumb.html' %}
+        <div class="pull-right">
+            <div class="btn-group download-buttons">
+                <a type="button" href="{% url 'archive' repo=repo branch=branch format='zip' %}" class="btn btn-default btn-xs" title="Download '{{ branch }}' as a ZIP archive">ZIP</a>
+                <a type="button" href="{% url 'archive' repo=repo branch=branch format='tar' %}" class="btn btn-default btn-xs" title="Download '{{ branch }}' as a TAR archive">TAR</a>
+                <a href="{% url 'rss' repo=repo branch=branch %}"><span class="fa fa-rss rss-icon"></span></a>
+            </div>
+        </div>
+    </ol>
+
+    {% if files %}
+    <table class="table tree">
+        <thead>
+            <tr>
+                <th width="80%">Name</th>
+                <th width="10%">Mode</th>
+                <th width="10%">Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if parent != None %}
+            <tr>
+                <td>
+                    {% if parent %}
+                        {% join branch '/' parent sep='' as commitishPath %}
+                        <a href="{% url 'tree' repo=repo commitishPath=commitishPath %}">..</a>
+                    {% else %}
+                        <a href="{% url 'branch' repo=repo branch=branch %}">..</a>
+                    {% endif %}
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endif %}
+            {% for file in files %}
+            <tr>
+                <td><span class="fa {% if file.mode == file.link_mode %}fa-file-text{% elif file.type == 'tree' %}fa-folder-open{% else %}fa-file-text-o{% endif %}"></span> <a href="
+                    {% join branch '/' file.path sep='' as commitishPath %}
+                    {% url file.type repo=repo commitishPath=commitishPath %}
+                ">{{ file.name }}</a></td>
+                <td>{{ file.mode|stringformat:"o" }}</td>
+                <td>{% if file.size %}{{ file.size|filesizeformat }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>This repository is empty.</p>
+    {% endif %}
+    {% if readme %}
+        <div class="readme-view">
+            <div class="md-header">
+                <span class="meta">{{ readme.filename }}</span>
+            </div>
+            <div id="md-content">{{ readme.content }}</div>
+        </div>
+    {% endif %}
+
+    <hr />
+{% endblock %}

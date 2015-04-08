@@ -1,0 +1,51 @@
+/.libs
+/.deps
+
+# Automake stuff
+/Makefile
+/Makefile.in
+/aclocal.m4
+/configure
+/config.h
+/config.h.in
+/config.h.in~
+/config.log
+/config.status
+/autom4te*.cache
+/stamp-h1
+/stamp-h.in
+/libtool
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.pyc
+*.pyo
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# OS X
+.DS_Store
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app

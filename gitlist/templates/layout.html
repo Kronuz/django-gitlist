@@ -1,0 +1,25 @@
+{% load staticfiles %}<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome.css' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
+        <!--[if lt IE 9]>
+        <script src="{% static 'js/html5.js' %}"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        {% block body %}{% endblock %}
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/raphael.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        <script src="{% static 'js/codemirror.js' %}"></script>
+        <script src="{% static 'js/showdown.js' %}"></script>
+        <script src="{% static 'js/table.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/networkGraph.js' %}"></script>
+    </body>
+</html>
