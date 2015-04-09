@@ -12,11 +12,11 @@ from django.http import Http404
 def get_repository_from_name(repo):
     path = settings.GITLIST_REPOSITORIES.get(repo)
     if not path:
-        raise Http404
+        raise Http404("Repository %s is not configured" % repo)
     path = os.path.expanduser(path)
     try:
         repository = git.Repo(path)
-    except git.InvalidGitRepositoryError as e:
+    except (git.InvalidGitRepositoryError, git.NoSuchPathError) as e:
         raise Http404("Invalid Git Repository: %s" % e)
     return repository
 

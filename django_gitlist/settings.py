@@ -83,5 +83,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 GITLIST_REPOSITORIES = {
-    'gitlist': '~/Development/django_gitlist',
+    'gitlist': '~/Development/Kronuz/django_gitlist',
 }

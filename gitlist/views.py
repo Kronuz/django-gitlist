@@ -5,11 +5,13 @@ import os
 import re
 import json
 import datetime
+import warnings
 from hashlib import md5
 from cStringIO import StringIO
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect, CompatibleStreamingHttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, CompatibleStreamingHttpResponse, Http404
 from django.shortcuts import render
 
 from .const import DEFAULT_FILE_TYPES, DEFAULT_BINARY_TYPES
@@ -150,7 +152,17 @@ class WrappedCommit(object):
 
 # Main
 def homepage(request):
-    repositories = None
+    repositories = []
+    for repo in settings.GITLIST_REPOSITORIES:
+        try:
+            repository = get_repository_from_name(repo)
+        except Http404 as e:
+            warnings.warn("Repository error: %s" % e)
+            continue
+        repositories.append(dict(
+            name=repo,
+            description=repository.description
+        ))
     return render(request, 'index.html', {
         'repositories': repositories,
     })
