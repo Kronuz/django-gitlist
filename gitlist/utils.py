@@ -29,13 +29,19 @@ def get_repository_from_name(repo):
 # separated by /, since route regexes are not enough to get that right.
 #
 def parse_commitish_path(commitishPath, repository):
-    try:
-        slash_position = commitishPath.index('/')
-        commitish = commitishPath[:slash_position]
-        path = commitishPath[slash_position + 1:]
-    except ValueError:
-        commitish = commitishPath
-        path = ''
+    for r in repository.branches + repository.tags:
+        if commitishPath.startswith(r.name):
+            commitish = r.name
+            path = commitishPath[len(commitish) + 1:]
+            break
+    else:
+        try:
+            slash_position = commitishPath.index('/')
+            commitish = commitishPath[:slash_position]
+            path = commitishPath[slash_position + 1:]
+        except ValueError:
+            commitish = commitishPath
+            path = ''
 
     try:
         commit = repository.commit(commitish)
