@@ -83,5 +83,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 GITLIST_REPOSITORIES = {
-    'gitlist': '~/Development/Kronuz/django_gitlist',
+    'dubalu': '/usr/local/www/dubalu',
+    'django': '/usr/local/www/django',
+    'GitList': '~/Development/Kronuz/django_gitlist',
+    'pyScss': '~/Development/Kronuz/pyScss',
+    'Xapiand': '~/Development/Kronuz/Xapian/Xapiand',
+    'pyXapiand': '~/Development/Kronuz/pyXapiand',
+    'CodeIntel': '~/Development/Kronuz/KomodoEdit',
 }

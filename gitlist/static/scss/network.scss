@@ -1,7 +1,7 @@
 .network-view {
   width: 100%;
-  margin-bottom: @line-height-base;
-  border: 1px solid @navbar-default-border;
+  margin-bottom: $line-height-base;
+  border: 1px solid $navbar-default-border;
   position: relative;
 
   &.loading-commits {
@@ -35,12 +35,12 @@
   }
 
   .network-header {
-    background-color: @navbar-default-bg;
+    background-color: $navbar-default-bg;
     padding: 8px;
-    line-height: @line-height-base;
+    line-height: $line-height-base;
     text-align: left;
     vertical-align: bottom;
-    border-bottom: 1px solid @navbar-default-border;
+    border-bottom: 1px solid $navbar-default-border;
 
     h4.meta {
       padding: 6px 0;
@@ -64,12 +64,12 @@
       top: 0;
       left: 0;
       padding: 8px;
-      margin: 0 0 @line-height-base;
+      margin: 0 0 $line-height-base;
       list-style: none;
-      background-color: @navbar-default-bg;
+      background-color: $navbar-default-bg;
       border: 1px solid #ddd;
 
-      .box-shadow(~"0 1px 0 rgba(255,255,255,0.4), 0 0 10px rgba(0,0,0,0.1)");
+      box-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 0 10px rgba(0,0,0,0.1);
 
       img {
         float: left;

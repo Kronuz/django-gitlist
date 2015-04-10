@@ -1,23 +1,23 @@
 .repository {
-  margin-bottom: @line-height-computed;
-  border: 1px solid @navbar-default-border;
+  margin-bottom: $line-height-computed;
+  border: 1px solid $navbar-default-border;
 
   .repository-header {
-    border-bottom: 1px solid @navbar-default-border;
+    border-bottom: 1px solid $navbar-default-border;
     padding: 10px;
-    font-size: @font-size-base;
+    font-size: $font-size-base;
     font-weight: 700;
 
     span.rss-icon {
-      font-size: @font-size-h3;
+      font-size: $font-size-h3;
     }
     > .fa {
       margin-right: 8px;
     }
   }
   .repository-body {
-    padding: @padding-base-vertical @padding-base-horizontal;
-    background-color: @navbar-default-bg;
+    padding: $padding-base-vertical $padding-base-horizontal;
+    background-color: $navbar-default-bg;
 
     p {
       margin: 0;
@@ -26,23 +26,23 @@
 }
 
 .tree {
-  border: 1px solid @navbar-default-border;
-  border-radius: @border-radius-base;
+  border: 1px solid $navbar-default-border;
+  border-radius: $border-radius-base;
 
   > thead > tr > th {
-    background-color: @navbar-default-bg;
+    background-color: $navbar-default-bg;
     padding: 8px;
-    line-height: @line-height-computed;;
+    line-height: $line-height-computed;;
     text-align: left;
     vertical-align: bottom;
-    border-bottom: 1px solid @navbar-default-border;
+    border-bottom: 1px solid $navbar-default-border;
   }
   tbody td {
     padding: 8px;
-    line-height: @line-height-computed;
+    line-height: $line-height-computed;
     text-align: left;
     vertical-align: top;
-    border-bottom: 1px solid @gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
 
     > .fa {
       margin-right: 8px;
@@ -63,16 +63,16 @@
 
 .source-view {
   width: 100%;
-  margin-bottom: @line-height-computed;
-  border: 1px solid @navbar-default-border;
+  margin-bottom: $line-height-computed;
+  border: 1px solid $navbar-default-border;
 
   .source-header {
-    background-color: @navbar-default-bg;
+    background-color: $navbar-default-bg;
     padding: 8px;
-    line-height: @line-height-computed;
+    line-height: $line-height-computed;
     text-align: left;
     vertical-align: bottom;
-    border-bottom: 1px solid @navbar-default-border;
+    border-bottom: 1px solid $navbar-default-border;
     height: 47px;
 
     .meta {
@@ -147,19 +147,19 @@
     padding: 8px;
   }
   tr {
-    border-bottom: 1px solid @gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
   }
   tr:last-child {
     border-bottom: 0
   }
   .line {
     font-weight: 700;
-    border-right: 1px solid @gray-lighter;
+    border-right: 1px solid $gray-lighter;
   }
   .commit {
     background-color: #F8F8F8;
     font-weight: 700;
-    border-right: 1px solid @gray-lighter;
+    border-right: 1px solid $gray-lighter;
   }
   pre {
     background-color: transparent;
@@ -172,23 +172,23 @@
 
 // Commits
 .commits {
-  border: 1px solid @navbar-default-border;
+  border: 1px solid $navbar-default-border;
 
   > thead > tr > th {
-    background-color: @navbar-default-bg;
+    background-color: $navbar-default-bg;
     padding: 8px;
-    line-height: @line-height-computed;;
+    line-height: $line-height-computed;;
     text-align: left;
     vertical-align: bottom;
-    border-bottom: 1px solid @navbar-default-border;
+    border-bottom: 1px solid $navbar-default-border;
   }
   tbody td {
     padding: 8px;
-    line-height: @line-height-computed;
+    line-height: $line-height-computed;
     text-align: left;
     vertical-align: top;
-    border-bottom: 1px solid @gray-lighter;
-    border-right: 1px solid @gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
+    border-right: 1px solid $gray-lighter;
   }
 
   h4, h5, h6 {
@@ -202,17 +202,17 @@
 
 .commit-view {
   width: 100%;
-  margin-bottom: @line-height-base;
-  border: 1px solid @navbar-default-border;
+  margin-bottom: $line-height-base;
+  border: 1px solid $navbar-default-border;
   border-radius: 0;
 
   .commit-header {
-    background-color: @navbar-default-bg;
+    background-color: $navbar-default-bg;
     padding: 8px;
-    line-height: @line-height-base;
+    line-height: $line-height-base;
     text-align: left;
     vertical-align: bottom;
-    border-bottom: 1px solid @navbar-default-border;
+    border-bottom: 1px solid $navbar-default-border;
 
     h4 {
       padding: 6px 0;
@@ -230,11 +230,11 @@
     padding: 8px 5px 8px 5px;
     font-size: 14px;
     font-weight: 700;
-    border-bottom: 1px solid lighten(@navbar-default-border, 5%);
+    border-bottom: 1px solid lighten($navbar-default-border, 5%);
     .meta {
       font-weight: normal;
       font-size: 14px;
-      color: @gray-light;
+      color: $gray-light;
     }
   }
   li:last-child {
@@ -244,23 +244,23 @@
 }
 
 .stats {
-  border: 1px solid @navbar-default-border;
-  border-radius: @border-radius-base;
+  border: 1px solid $navbar-default-border;
+  border-radius: $border-radius-base;
 
   > thead > tr > th {
-    background-color: @navbar-default-bg;
+    background-color: $navbar-default-bg;
     padding: 8px;
-    line-height: @line-height-computed;;
+    line-height: $line-height-computed;;
     text-align: left;
     vertical-align: bottom;
-    border-bottom: 1px solid @navbar-default-border;
+    border-bottom: 1px solid $navbar-default-border;
   }
   tbody td {
     padding: 8px;
-    line-height: @line-height-computed;
+    line-height: $line-height-computed;
     text-align: left;
     vertical-align: top;
-    border-bottom: 1px solid @gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
 
     > .fa {
       margin-right: 8px;
@@ -280,24 +280,24 @@
 }
 
 .readme-view {
-  border: 1px solid @navbar-default-border;
+  border: 1px solid $navbar-default-border;
 }
 
 .md-view {
   width: 100%;
-  margin-bottom: @line-height-base;
+  margin-bottom: $line-height-base;
 }
 
 .md-header {
-  padding: @padding-large-horizontal;
-  background-color: @navbar-default-bg;
-  line-height: @line-height-base;
-  border-bottom: 1px solid lighten(@navbar-default-border, 5%);
+  padding: $padding-large-horizontal;
+  background-color: $navbar-default-bg;
+  line-height: $line-height-base;
+  border-bottom: 1px solid lighten($navbar-default-border, 5%);
   font-weight: bold;
 }
 
 #md-content {
-  padding: @padding-large-vertical @padding-large-horizontal;
-  color: @text-color;
+  padding: $padding-large-vertical $padding-large-horizontal;
+  color: $text-color;
 }
 
