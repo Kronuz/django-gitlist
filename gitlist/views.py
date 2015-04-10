@@ -84,12 +84,14 @@ class WrappedDiff(object):
                 getNumOld = ''
                 getNumNew = num_new
                 num_new += 1
-            else:
+            elif line[0] == ' ':
                 getType = None
                 getNumOld = num_old
                 getNumNew = num_new
                 num_old += 1
                 num_new += 1
+            else:
+                continue
             lines.append(dict(
                 getType=getType,
                 getNumOld=getNumOld,
