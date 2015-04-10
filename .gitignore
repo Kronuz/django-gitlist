@@ -49,3 +49,6 @@
 *.exe
 *.out
 *.app
+
+# Sass
+.sass-cache
