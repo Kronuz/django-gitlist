@@ -34,7 +34,11 @@ class WrappedDiff(object):
 
     @property
     def file(self):
-        return self.diff.b_blob.path
+        if self.diff.b_blob:
+            return self.diff.b_blob.path
+        if self.diff.a_blob:
+            return self.diff.a_blob.path
+        return 'unknown'
 
     @property
     def index(self):
