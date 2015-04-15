@@ -298,12 +298,14 @@ def blob(request, repo, commitishPath):
 def blob_raw(request, repo, commitishPath):
     repository = get_repository_from_name(repo)
     branch, path = parse_commitish_path(commitishPath, repository)
-    tree = repository.tree()
+    tree = repository.tree(branch)
 
     blob = tree[path]
     f = blob.data_stream
-    response = CompatibleStreamingHttpResponse(iter(lambda: f.read(STREAM_CHUNK_SIZE), b''),
-                                               content_type=blob.mime_type)
+    response = CompatibleStreamingHttpResponse(
+        iter(lambda: f.read(STREAM_CHUNK_SIZE), b''),
+        content_type=blob.mime_type,
+    )
 
     _, ext = os.path.splitext(blob.name)
     if ext in DEFAULT_BINARY_TYPES:
