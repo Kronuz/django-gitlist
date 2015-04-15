@@ -21,8 +21,7 @@
             </div>
         </div>
         {% if fileType == 'image' %}
-        <div class="text-center"><img src="{% url 'blob_raw' repo=repo commitishPath=commitishPath %}" alt="{{ file }}" class="image-blob" /></div>
-
+            <div class="text-center"><img src="{% url 'blob_raw' repo=repo commitishPath=commitishPath %}" alt="{{ file }}" class="image-blob" /></div>
         {% elif fileType == 'markdown' %}
             <div class="md-view"><div id="md-content">{{ blob }}</div></div>
         {% else %}
