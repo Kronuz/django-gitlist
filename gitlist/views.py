@@ -269,10 +269,11 @@ def blob(request, repo, commitishPath):
 
     breadcrumbs = []
     for i, b in enumerate(split_path):
-        path = '/'.join(split_path[:i + 1])
+        commitishPath = '/'.join([branch] + split_path[:i + 1])
+        path = reverse('blob' if i == len(split_path) else 'tree', kwargs=dict(repo=repo, commitishPath=commitishPath))
         breadcrumbs.append({
             'dir': b,
-            'path': reverse('tree', kwargs=dict(repo=repo, commitishPath=commitishPath)),
+            'path': path,
         })
 
     return render(request, 'file.html', {
@@ -478,10 +479,11 @@ def tree(request, repo, commitishPath=''):
 
     breadcrumbs = []
     for i, b in enumerate(split_path):
-        path = '/'.join(split_path[:i + 1])
+        commitishPath = '/'.join([branch] + split_path[:i + 1])
+        path = reverse('blob' if i == len(split_path) else 'tree', kwargs=dict(repo=repo, commitishPath=commitishPath))
         breadcrumbs.append({
             'dir': b,
-            'path': reverse('tree', kwargs=dict(repo=repo, commitishPath=commitishPath)),
+            'path': path,
         })
 
     return render(request, 'tree.html', {
