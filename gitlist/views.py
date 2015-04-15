@@ -270,15 +270,16 @@ def blob(request, repo, commitishPath):
     breadcrumbs = []
     for i, b in enumerate(split_path):
         commitishPath = '/'.join([branch] + split_path[:i + 1])
-        path = reverse('blob' if i == len(split_path) else 'tree', kwargs=dict(repo=repo, commitishPath=commitishPath))
+        path_ = reverse('blob' if i == len(split_path) else 'tree', kwargs=dict(repo=repo, commitishPath=commitishPath))
         breadcrumbs.append({
             'dir': b,
-            'path': path,
+            'path': path_,
         })
 
     return render(request, 'file.html', {
         'page': 'files',
         'file': file,
+        'path': path,
         'fileType': fileType,
         'blob': blob,
         'repo': repo,
@@ -402,6 +403,7 @@ def searchcommits(request, repo, branch):
         'repo': repo,
         'branch': branch,
         'file': file,
+        'path': path,
         'commits': commits,
         'branches': branches,
         'tags': tags,
@@ -480,10 +482,10 @@ def tree(request, repo, commitishPath=''):
     breadcrumbs = []
     for i, b in enumerate(split_path):
         commitishPath = '/'.join([branch] + split_path[:i + 1])
-        path = reverse('blob' if i == len(split_path) else 'tree', kwargs=dict(repo=repo, commitishPath=commitishPath))
+        path_ = reverse('blob' if i == len(split_path) else 'tree', kwargs=dict(repo=repo, commitishPath=commitishPath))
         breadcrumbs.append({
             'dir': b,
-            'path': path,
+            'path': path_,
         })
 
     return render(request, 'tree.html', {
