@@ -13,6 +13,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, CompatibleStreamingHttpResponse, Http404
 from django.shortcuts import render
+from django.template.defaultfilters import filesizeformat
 
 from .const import DEFAULT_FILE_TYPES, DEFAULT_BINARY_TYPES
 from .utils import get_repository_from_name, parse_commitish_path, get_readme
@@ -68,7 +69,11 @@ class WrappedDiff(object):
                 getLine="file renamed from %s to %s" % (self.diff.rename_from, self.diff.rename_to,)
             ))
 
-        for line in self.diff.diff.decode(self.encoding).split('\n'):
+        try:
+            diff_lines = self.diff.diff.decode(self.encoding)
+        except Exception:
+            diff_lines = "Binary content (%s)" % filesizeformat(len(self.diff.diff))
+        for line in diff_lines.split('\n'):
             if line[:4] in ('', '--- ', '+++ '):
                 continue
             chunk = self.CHUNK_RE.match(line)
@@ -440,8 +445,12 @@ def blame(request, repo, commitishPath):
 
     blames = []
     for blame in repository.blame(branch, path):
+        try:
+            line = '\n'.join(blame[1])
+        except Exception:
+            line = "Binary content (%s)" % filesizeformat(sum(map(len, blame[1])))
         blames.append(dict(
-            line='\n'.join(blame[1]),
+            line=line,
             commit=blame[0].hexsha,
             commitShort=blame[0].hexsha[:8],
         ))
